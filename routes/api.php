@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group([
+    'prefix' => 'v1',
+    'as' => 'api.v1.',
+    'namespace' => 'Api\V1'
+], function ($api) {
+    $api->get('states', 'GetStates');
+    $api->get('states/{state}/municipalities', 'GetMunicipalities');
+    $api->post('prices', 'GetPrices');
+});
